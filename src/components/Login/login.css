@@ -147,7 +147,7 @@
     background-color: #e7e7e7;
 }
 
-.login-steem-con-block_login {
+.login-dpay-con-block_login {
     transition: .2s all ease;
     margin: 10px 0 0 0;
 }
@@ -159,7 +159,7 @@
     overflow: hidden;
 }
 
-.steem-con-btn_login {
+.dpay-con-btn_login {
     width: 220px;
     height: 40px;
     text-align: center;
@@ -172,11 +172,11 @@
     transition: .2s all ease;
 }
 
-.steem-con-btn_login:hover {
+.dpay-con-btn_login:hover {
     box-shadow: 0 4px 7px 0 rgba(74, 144, 226, .3);
 }
 
-.steem-con-btn_login:active {
+.dpay-con-btn_login:active {
     box-shadow: 0 0 0 0;
 }
 
@@ -189,7 +189,7 @@
 }
 
 @media (max-width: 430px) {
-    .steem-con-btn_login {
+    .dpay-con-btn_login {
         margin-left: 20px;
     }
 }

@@ -9,7 +9,7 @@ import Constants from '../common/constants';
 import {inputError, stopTransferWithError} from './transfer';
 import ChainService from '../services/ChainService';
 import AuthService from '../services/AuthService';
-import SteemService from '../services/SteemService';
+import DPayService from '../services/DPayService';
 
 function addDataToWallet(data) {
 	return {
@@ -27,9 +27,9 @@ function updateAccountBalance() {
 					type: 'UPDATE_ACCOUNT_BALANCE',
 					newBalance: {
 						balance: parseFloat(data.balance.split(' ')[0]),
-						sbd_balance: parseFloat(data.sbd_balance.split(' ')[0]),
-						total_steem_power_steem: SteemService.vestsToSp(data.vesting_shares),
-						total_steem_power_vests: parseFloat(data.vesting_shares.split(' ')[0])
+						bbd_balance: parseFloat(data.bbd_balance.split(' ')[0]),
+						total_dpay_power_dpay: DPayService.vestsToBp(data.vesting_shares),
+						total_dpay_power_vests: parseFloat(data.vesting_shares.split(' ')[0])
 					}
 				})
 			})
@@ -50,12 +50,12 @@ export function getAccountsSelectiveData() {
     ChainService.getAccounts(AuthService.getUsername())
       .then(response => {
         const data = response[0];
-        const sbdRewards = parseFloat(data['reward_sbd_balance'].split(' ')[0]);
-        const steemRewards = parseFloat(data['reward_steem_balance'].split(' ')[0]);
-        const steemPowerRewards = parseFloat(data['reward_vesting_steem'].split(' ')[0]);
-        const steemPowerRewardsInVests = parseFloat(data['reward_vesting_balance'].split(' ')[0]);
+        const bbdRewards = parseFloat(data['reward_bbd_balance'].split(' ')[0]);
+        const dpayRewards = parseFloat(data['reward_dpay_balance'].split(' ')[0]);
+        const dpayPowerRewards = parseFloat(data['reward_vesting_dpay'].split(' ')[0]);
+        const dpayPowerRewardsInVests = parseFloat(data['reward_vesting_balance'].split(' ')[0]);
         let noRewards = true;
-        if (sbdRewards || steemRewards || steemPowerRewards) {
+        if (bbdRewards || dpayRewards || dpayPowerRewards) {
         	noRewards = false;
 				}
         const selectiveData = {
@@ -63,12 +63,12 @@ export function getAccountsSelectiveData() {
           next_power_down: data['next_vesting_withdrawal'] === '1969-12-31T23:59:59' ? '' : data['next_vesting_withdrawal'],
 					to_withdraw: data['to_withdraw'],
 					withdrawn: data['withdrawn'],
-          sbd_rewards: sbdRewards,
-          steem_rewards: steemRewards,
-          steem_power_rewards: steemPowerRewards,
-          steem_power_rewards_in_vests: steemPowerRewardsInVests,
-					sp_received_by_delegation: parseFloat(SteemService.vestsToSp(data['received_vesting_shares'])),
-					sp_delegated_to_someone: parseFloat(SteemService.vestsToSp(data['delegated_vesting_shares']))
+          bbd_rewards: bbdRewards,
+          dpay_rewards: dpayRewards,
+          dpay_power_rewards: dpayPowerRewards,
+          dpay_power_rewards_in_vests: dpayPowerRewardsInVests,
+					sp_received_by_delegation: parseFloat(DPayService.vestsToBp(data['received_vesting_shares'])),
+					sp_delegated_to_someone: parseFloat(DPayService.vestsToBp(data['delegated_vesting_shares']))
         };
         dispatch(addDataToWallet(selectiveData));
       })
@@ -85,7 +85,7 @@ export function claimAccountRewards(liquid_tokens, not_liquid_tokens, power_toke
 	return dispatch => {
     dispatch(actionLock());
     dispatch(showBodyLoader());
-		ChainService.claimRewards(liquid_tokens || '0.000 STEEM', not_liquid_tokens || '0.000 SBD',
+		ChainService.claimRewards(liquid_tokens || '0.000 BEX', not_liquid_tokens || '0.000 BBD',
 			power_tokens || '0.000000 VESTS')
 			.then(() => {
         dispatch(actionUnlock());
@@ -139,7 +139,7 @@ export function powerUp() {
 		const {activeKey, saveKey} = state.activeKey;
 
     if (storage.accessToken) {
-      WalletService.powerUpSteemConnect(amount)
+      WalletService.powerUpDPayId(amount)
         .then(() => {
           dispatch(actionUnlock());
           dispatch(hideBodyLoader());
@@ -173,24 +173,24 @@ export function powerDown() {
 	}
 	return dispatch => {
 		const {amount, sp_received_by_delegation, sp_delegated_to_someone} = state.wallet;
-    const {total_steem_power_steem, total_steem_power_vests} = state.userProfile.profile;
+    const {total_dpay_power_dpay, total_dpay_power_vests} = state.userProfile.profile;
 		let amountString = amount.toString();
     amountString = amountString.match(/\d+(\.\d+)?/);
 		if (amountString[0] !== amountString.input) {
       return dispatch(setErrorWithPushNotification('amountError', Constants.PROMOTE.INPUT_ERROR));
 		}
-    if (total_steem_power_steem - amount - sp_received_by_delegation - sp_delegated_to_someone <
-			Constants.TRANSFER.MIN_LEAVE_STEEM_POWER) {
+    if (total_dpay_power_dpay - amount - sp_received_by_delegation - sp_delegated_to_someone <
+			Constants.TRANSFER.MIN_LEAVE_DPAY_POWER) {
       return dispatch(setErrorWithPushNotification('amountError',
-				`You should leave not less than ${Constants.TRANSFER.MIN_LEAVE_STEEM_POWER} steem power (delegated consider).`))
+				`You should leave not less than ${Constants.TRANSFER.MIN_LEAVE_DPAY_POWER} BEX power (delegated consider).`))
     }
 		dispatch(actionLock());
 		dispatch(showBodyLoader());
-		const amountVests = (amount / total_steem_power_steem) * total_steem_power_vests;
+		const amountVests = (amount / total_dpay_power_dpay) * total_dpay_power_vests;
 		const {activeKey, saveKey} = state.activeKey;
 
     if (storage.accessToken) {
-      WalletService.powerDownSteemConnect(amountVests)
+      WalletService.powerDownDPayId(amountVests)
         .then(() => {
           dispatch(actionUnlock());
           dispatch(hideBodyLoader());
@@ -231,7 +231,7 @@ export function cancelPowerDown() {
     const {activeKey, saveKey} = state.activeKey;
 
     if (storage.accessToken) {
-      WalletService.cancelPowerDownSteemConnect(amountVests)
+      WalletService.cancelPowerDownDPayId(amountVests)
         .then(() => {
           dispatch(actionUnlock());
           dispatch(hideBodyLoader());

@@ -11,9 +11,9 @@ import {changeFollowUserCard} from '../../../actions/usersList';
 const User = ({user, authUser, changeFollow}) => {
 
 	let amountMoney = null;
-	if (user.amount_sbd) {
+	if (user.amount_bbd) {
 		amountMoney = <span className="money_user">
-										{(user.amount_sbd < 0 ? '-' : '+') + '$' + Math.abs(user.amount_sbd.toFixed(3))}
+										{(user.amount_bbd < 0 ? '-' : '+') + '$' + Math.abs(user.amount_bbd.toFixed(3))}
 									</span>;
 	}
 	return (

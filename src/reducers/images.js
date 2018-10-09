@@ -21,12 +21,12 @@ export default function images(state = {}, action) {
 				let postUrl = action.posts[url].media[0].url || action.posts[url].body;
 				let avatarUrl = action.posts[url].avatar;
 				proxysUrls[postUrl] = {
-					[defaultPostSize]: `https://steemitimages.com/${2 * defaultPostSize}x${2 * defaultPostSize}/` + postUrl
+					[defaultPostSize]: `https://dsiteimages.com/${2 * defaultPostSize}x${2 * defaultPostSize}/` + postUrl
 				};
 				proxysUrls[avatarUrl] = {
-					[defaultAvaSize]: `https://steemitimages.com/${2 * defaultAvaSize}x${2 * defaultAvaSize}/` + avatarUrl,
-					[userCardAvaSize]: `https://steemitimages.com/${2 * userCardAvaSize}x${2 * userCardAvaSize}/` + avatarUrl,
-					[userProfAvaSize]: `https://steemitimages.com/${2 * userProfAvaSize}x${2 * userProfAvaSize}/` + avatarUrl,
+					[defaultAvaSize]: `https://dsiteimages.com/${2 * defaultAvaSize}x${2 * defaultAvaSize}/` + avatarUrl,
+					[userCardAvaSize]: `https://dsiteimages.com/${2 * userCardAvaSize}x${2 * userCardAvaSize}/` + avatarUrl,
+					[userProfAvaSize]: `https://dsiteimages.com/${2 * userProfAvaSize}x${2 * userProfAvaSize}/` + avatarUrl,
 				}
 			}
 			return {
@@ -39,9 +39,9 @@ export default function images(state = {}, action) {
 			for (let user in action.users) {
 				let avatarUrl = action.users[user].avatar;
 				proxysAvaUrls[avatarUrl] = {
-					[defaultAvaSize]: `https://steemitimages.com/${2 * defaultAvaSize}x${2 * defaultAvaSize}/` + avatarUrl,
-					[userCardAvaSize]: `https://steemitimages.com/${2 * userCardAvaSize}x${2 * userCardAvaSize}/` + avatarUrl,
-					[userProfAvaSize]: `https://steemitimages.com/${2 * userProfAvaSize}x${2 * userProfAvaSize}/` + avatarUrl,
+					[defaultAvaSize]: `https://dsiteimages.com/${2 * defaultAvaSize}x${2 * defaultAvaSize}/` + avatarUrl,
+					[userCardAvaSize]: `https://dsiteimages.com/${2 * userCardAvaSize}x${2 * userCardAvaSize}/` + avatarUrl,
+					[userProfAvaSize]: `https://dsiteimages.com/${2 * userProfAvaSize}x${2 * userProfAvaSize}/` + avatarUrl,
 				}
 			}
 			return {
@@ -54,9 +54,9 @@ export default function images(state = {}, action) {
       for (let url in action.posts) {
         let avatarUrl = action.posts[url].avatar;
         proxysCommentUrls[avatarUrl] = {
-          [defaultAvaSize]: `https://steemitimages.com/${2 * defaultAvaSize}x${2 * defaultAvaSize}/` + avatarUrl,
-          [userCardAvaSize]: `https://steemitimages.com/${2 * userCardAvaSize}x${2 * userCardAvaSize}/` + avatarUrl,
-          [userProfAvaSize]: `https://steemitimages.com/${2 * userProfAvaSize}x${2 * userProfAvaSize}/` + avatarUrl,
+          [defaultAvaSize]: `https://dsiteimages.com/${2 * defaultAvaSize}x${2 * defaultAvaSize}/` + avatarUrl,
+          [userCardAvaSize]: `https://dsiteimages.com/${2 * userCardAvaSize}x${2 * userCardAvaSize}/` + avatarUrl,
+          [userProfAvaSize]: `https://dsiteimages.com/${2 * userProfAvaSize}x${2 * userProfAvaSize}/` + avatarUrl,
         }
       }
       return {
@@ -68,9 +68,9 @@ export default function images(state = {}, action) {
 			let avatarHeaderUrl = action.avatar;
 			let proxyHeaderAvaUrl = {
 				[avatarHeaderUrl]: {
-					[defaultAvaSize]: `https://steemitimages.com/${2 * defaultAvaSize}x${2 * defaultAvaSize}/` + avatarHeaderUrl,
-					[userCardAvaSize]: `https://steemitimages.com/${2 * userCardAvaSize}x${2 * userCardAvaSize}/` + avatarHeaderUrl,
-					[userProfAvaSize]: `https://steemitimages.com/${2 * userProfAvaSize}x${2 * userProfAvaSize}/` + avatarHeaderUrl,
+					[defaultAvaSize]: `https://dsiteimages.com/${2 * defaultAvaSize}x${2 * defaultAvaSize}/` + avatarHeaderUrl,
+					[userCardAvaSize]: `https://dsiteimages.com/${2 * userCardAvaSize}x${2 * userCardAvaSize}/` + avatarHeaderUrl,
+					[userProfAvaSize]: `https://dsiteimages.com/${2 * userProfAvaSize}x${2 * userProfAvaSize}/` + avatarHeaderUrl,
 				}
 			};
 			return {
@@ -82,9 +82,9 @@ export default function images(state = {}, action) {
       let profileAvaUrl = action.profile['profile_image'];
       let proxyProfileAvaUrl = {
         [profileAvaUrl]: {
-          [defaultAvaSize]: `https://steemitimages.com/${2 * defaultAvaSize}x${2 * defaultAvaSize}/` + profileAvaUrl,
-          [userCardAvaSize]: `https://steemitimages.com/${2 * userCardAvaSize}x${2 * userCardAvaSize}/` + profileAvaUrl,
-          [userProfAvaSize]: `https://steemitimages.com/${2 * userProfAvaSize}x${2 * userProfAvaSize}/` + profileAvaUrl
+          [defaultAvaSize]: `https://dsiteimages.com/${2 * defaultAvaSize}x${2 * defaultAvaSize}/` + profileAvaUrl,
+          [userCardAvaSize]: `https://dsiteimages.com/${2 * userCardAvaSize}x${2 * userCardAvaSize}/` + profileAvaUrl,
+          [userProfAvaSize]: `https://dsiteimages.com/${2 * userProfAvaSize}x${2 * userProfAvaSize}/` + profileAvaUrl
         }
       };
       return {
@@ -96,7 +96,7 @@ export default function images(state = {}, action) {
       let botAvaUrl = action.bot.avatar;
       let proxyBotAvaUrl = {
       	[botAvaUrl]: {
-          [userProfAvaSize]: `https://steemitimages.com/${2 * userProfAvaSize}x${2 * userProfAvaSize}/` + botAvaUrl
+          [userProfAvaSize]: `https://dsiteimages.com/${2 * userProfAvaSize}x${2 * userProfAvaSize}/` + botAvaUrl
 				}
 			};
 			return {

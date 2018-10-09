@@ -418,8 +418,8 @@ class PostModal extends React.Component {
 const mapStateToProps = (state) => {
 	let currentIndex = state.postModal.currentIndex;
 	let post = state.posts[currentIndex];
-	let isGolosService = ChainService.usingGolos();
-	let linkToSinglePost = document.location.origin + (isGolosService ? '/' + Constants.SERVICES.golos.name : '')
+	let isDWebService = ChainService.usingDWeb();
+	let linkToSinglePost = document.location.origin + (isDWebService ? '/' + Constants.SERVICES.dweb.name : '')
 		+ '/post' + post.url.replace(/\/[\w-.]+/, '');
 	let onlyPostModalOpen = Object.keys(state.modals).length === 1;
 	if (post) {
@@ -434,7 +434,7 @@ const mapStateToProps = (state) => {
 			urlVideo,
 			notFullScreenByScreenSize,
 			isCommentEditing,
-			isGolosService,
+			isDWebService,
 			linkToSinglePost,
 			onlyPostModalOpen,
       moreThenOneModal,

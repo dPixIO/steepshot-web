@@ -5,7 +5,7 @@ import WalletPopupTemplate from '../WalletPopupTemplate/WalletPopupTemplate';
 import {closeModal} from '../../../actions/modal';
 import PowerForm from '../../Common/PowerForm/PowerForm';
 import {changeAmount, powerUp, isValidAmountTokens} from '../../../actions/wallet';
-import InOutSteem from '../WalletPopupTemplate/InOutSteem/InOutSteem';
+import InOutDPay from '../WalletPopupTemplate/InOutDPay/InOutDPay';
 
 class PowerUp extends React.Component {
 
@@ -21,17 +21,17 @@ class PowerUp extends React.Component {
 	render() {
 		const {username, balance, amount, token, amountError} = this.props;
 		return (
-			<WalletPopupTemplate title="CONVERT TO STEEM POWER"
+			<WalletPopupTemplate title="CONVERT TO BEX POWER"
 			                     username={username}
 			                     textButton="POWER UP"
 			                     cancel={this.props.closePowerUpModal}
 			                     ok={this.sendPowerUp}>
-				<InOutSteem point="power-up"/>
+				<InOutDPay point="power-up"/>
 				<div className="description_power-up">
 					Tokens give you the ability to influence the reward for content.
 				</div>
 				<div className="description_power-up">
-					STEEM POWER - non-liquid tokens, it takes three months (13 weekly payments) to convert them into Steem's
+					BEX POWER - non-liquid tokens, it takes three months (13 weekly payments) to convert them into dPay's
 					liquid tokens.
 				</div>
 				<PowerForm amount={amount}

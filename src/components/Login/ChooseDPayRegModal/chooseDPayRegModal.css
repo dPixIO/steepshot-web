@@ -1,15 +1,15 @@
-.wrapper_choose-steem-reg-mod {
+.wrapper_choose-dpay-reg-mod {
     display: block;
     background: #ffffff;
     border-radius: 10px;
     padding: 25px 30px 20px 30px;
 }
 
-.close-button_choose-steem-reg-mod {
+.close-button_choose-dpay-reg-mod {
     margin-left: 20px;
 }
 
-.title_choose-steem-reg-mod {
+.title_choose-dpay-reg-mod {
     display: flex;
     align-items: center;
     font: 16px OpenSans-Regular;
@@ -18,13 +18,13 @@
     border-bottom: 1px solid #f4f4f6;
 }
 
-.reg-services-items_choose-steem-reg-mod {
+.reg-services-items_choose-dpay-reg-mod {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #f4f4f6;
 }
 
-.reg-service_choose-steem-reg-mod {
+.reg-service_choose-dpay-reg-mod {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,11 +32,11 @@
     width: 140px;
 }
 
-.reg-service_choose-steem-reg-mod:nth-child(2) {
+.reg-service_choose-dpay-reg-mod:nth-child(2) {
     margin: 0 18px;
 }
 
-.reg-service-logo_choose-steem-reg-mod {
+.reg-service-logo_choose-dpay-reg-mod {
     width: 140px;
     height: 140px;
     background: center no-repeat;
@@ -45,49 +45,49 @@
     border-radius: 16px;
 }
 
-.reg-service-logo_choose-steem-reg-mod:hover {
+.reg-service-logo_choose-dpay-reg-mod:hover {
     border: 1px solid #e74800;
     cursor: pointer;
 }
 
-.reg-service-name_choose-steem-reg-mod {
+.reg-service-name_choose-dpay-reg-mod {
     text-align: center;
     margin-top: 16px;
     font: 12px OpenSans-Semibold;
     color: #333333;
 }
 
-.reg-service-params_choose-steem-reg-mod {
+.reg-service-params_choose-dpay-reg-mod {
     margin: 0;
     font: 12px OpenSans-Regular;
     color: #979b9e;
 }
 
-.buttons_choose-steem-reg-mod {
+.buttons_choose-dpay-reg-mod {
     text-align: right;
     padding-top: 20px;
 }
 
-.buttons_choose-steem-reg-mod button {
+.buttons_choose-dpay-reg-mod button {
     font: 12px OpenSans-Semibold;
 }
 
 @media (max-width: 540px) {
-    .wrapper_choose-steem-reg-mod {
+    .wrapper_choose-dpay-reg-mod {
         max-width: 90vw;
     }
 
-    .reg-services-items_choose-steem-reg-mod {
+    .reg-services-items_choose-dpay-reg-mod {
         flex-direction: column;
         align-items: center;
         padding-bottom: 15px;
     }
 
-    .reg-service_choose-steem-reg-mod {
+    .reg-service_choose-dpay-reg-mod {
         padding: 15px 0 0 0;
     }
 
-    .buttons_choose-steem-reg-mod button {
+    .buttons_choose-dpay-reg-mod button {
         padding: 10px 30px;
     }
 }

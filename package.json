@@ -1,6 +1,6 @@
 {
-  "name": "steepshot-web",
-  "version": "0.0.6",
+  "name": "dpix-web",
+  "version": "0.0.1",
   "repository": {
     "type": "git"
   },
@@ -24,8 +24,9 @@
   },
   "dependencies": {
     "create-react-server": "^0.3.2",
+    "dpayid": "~0.1.3",
+    "dpayjs": "~0.7.6",
     "es6-promise": "^4.2.4",
-    "golos-js": "^0.6.3",
     "history": "^4.7.2",
     "image-compressor.js": "^1.1.4",
     "isomorphic-fetch": "^2.2.1",
@@ -47,8 +48,6 @@
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
     "remarkable": "^1.7.1",
-    "sc2-sdk": "^1.0.2",
-    "steem": "^0.7.1",
     "styled-components": "^3.4.2",
     "styled-is": "^1.1.5",
     "timeago-react": "^2.0.0"

@@ -21,7 +21,7 @@ class SinglePost extends React.Component {
 		let itemPost;
 		if (Object.keys(this.props.post).length !== 0) {
 			itemPost = this.props.post[Object.keys(this.props.post)[0]];
-			document.title = `@${itemPost.author}: «${itemPost.title}» | Steepshot`;
+			document.title = `@${itemPost.author}: «${itemPost.title}» | dPix`;
 		}
 
 		if (!this.props.currentIndex) return null;

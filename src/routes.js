@@ -14,7 +14,7 @@ import Login from './components/Login/Login';
 import Browse from './components/Browse/Browse';
 import Settings from './components/Settings/Settings';
 import RouteWithService from './components/Routes/RouteWithService';
-import SteemConnect from './components/SteemConnect/SteemConnect';
+import DPayId from './components/DPayId/DPayId';
 import AuthService from './services/AuthService';
 import Wallet from './components/Wallet/Wallet';
 import BrowseServerPage from './serverPages/BrowseServerPage';
@@ -31,7 +31,7 @@ export default function getRoutes() {
 		<App>
 			<Switch>
 				<Route exact path="/" render={() => <Redirect to="/browse"/>}/>
-				<Route exact path="/steemConnect" component={SteemConnect}/>
+				<Route exact path="/dPayId" component={DPayId}/>
 				<Route exact path="/signin" render={() => (
 					AuthService.isAuth() ? (
 						<Redirect push to="/feed"/>
@@ -41,16 +41,16 @@ export default function getRoutes() {
 				)}/>
 				<Route path="/guide" component={About}/>
 				<Route path="/dev/test" component={Testing}/>
-				<RouteWithService path="/:service(golos)?/browse/:filter?" component={Browse}/>
-				<RouteWithService path="/:service(golos)?/post" component={SinglePost}/>
-				<RouteWithService path="/:service(golos)?/@:username" component={UserProfile}/>
-				<RouteWithService path="/:service(golos)?/search/:searchValue" component={Search}/>
-				<PrivateRoute path="/:service(golos)?/feed" component={Feed}/>
+				<RouteWithService path="/:service(dweb)?/browse/:filter?" component={Browse}/>
+				<RouteWithService path="/:service(dweb)?/post" component={SinglePost}/>
+				<RouteWithService path="/:service(dweb)?/@:username" component={UserProfile}/>
+				<RouteWithService path="/:service(dweb)?/search/:searchValue" component={Search}/>
+				<PrivateRoute path="/:service(dweb)?/feed" component={Feed}/>
 				<Redirect path="/createPost" to='/editPost'/>
-				<PrivateRoute path="/:service(golos)?/editPost/:category?/:username?/:permlink?" component={EditPost}/>
-				<PrivateRoute path="/:service(golos)?/Profile" component={UserProfile}/>
-				<PrivateRoute path="/:service(golos)?/settings" component={Settings}/>
-				<PrivateRoute path="/:service(golos)?/wallet" component={Wallet}/>
+				<PrivateRoute path="/:service(dweb)?/editPost/:category?/:username?/:permlink?" component={EditPost}/>
+				<PrivateRoute path="/:service(dweb)?/Profile" component={UserProfile}/>
+				<PrivateRoute path="/:service(dweb)?/settings" component={Settings}/>
+				<PrivateRoute path="/:service(dweb)?/wallet" component={Wallet}/>
 				<Route path="*" component={NotFound}/>
 			</Switch>
 		</App>
@@ -62,16 +62,16 @@ export function getServerRouter() {
 	return (
 		<Switch>
 			<Route exact path="/" component={BrowseServerPage}/>
-			<RouteWithService path="/:service(golos)?/browse/:filter?" component={BrowseServerPage}/>
-			<Route exact path="/:service(golos)?/feed" component={BrowseServerPage}/>
+			<RouteWithService path="/:service(dweb)?/browse/:filter?" component={BrowseServerPage}/>
+			<Route exact path="/:service(dweb)?/feed" component={BrowseServerPage}/>
 			<Route exact path="/signin" component={LoginServerPage}/>
 			<Route path="/guide" component={AboutServerPage}/>
-			<RouteWithService path="/:service(golos)?/post" component={SinglePostServerPage}/>
-			<RouteWithService path="/:service(golos)?/@:username" component={UserProfileServerPage}/>
-			<RouteWithService path="/:service(golos)?/Profile" component={UserProfileServerPage}/>
-			<RouteWithService path="/:service(golos)?/search/:searchValue" component={SearchServerPage}/>
+			<RouteWithService path="/:service(dweb)?/post" component={SinglePostServerPage}/>
+			<RouteWithService path="/:service(dweb)?/@:username" component={UserProfileServerPage}/>
+			<RouteWithService path="/:service(dweb)?/Profile" component={UserProfileServerPage}/>
+			<RouteWithService path="/:service(dweb)?/search/:searchValue" component={SearchServerPage}/>
 			<Route path="/createPost" component={EditPostServerPage}/>
-			<RouteWithService path="/:service(golos)?/editPost/:category?/:username?/:permlink?" component={EditPostServerPage}/>
+			<RouteWithService path="/:service(dweb)?/editPost/:category?/:username?/:permlink?" component={EditPostServerPage}/>
 			<Route path="*" component={NotFoundSeverPage}/>
 		</Switch>
 	)

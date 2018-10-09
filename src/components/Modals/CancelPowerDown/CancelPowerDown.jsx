@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import SteemService from '../../../services/SteemService';
+import DPayService from '../../../services/DPayService';
 import {closeModal} from '../../../actions/modal';
 import {cancelPowerDown} from '../../../actions/wallet';
 import InputActiveKey from '../../Common/InputActiveKey/InputActiveKey';
@@ -35,9 +35,9 @@ const LinkToUser = ({className, children, user}) => {
 };
 
 const StyledLinkToUser = styled(LinkToUser)`
-  color: #e74800; 
+  color: #e74800;
   font: 14px OpenSans-Bold;
-  
+
   &:hover {
     opacity: .6;
   }
@@ -52,7 +52,7 @@ const AmountField = styled.div`
 `;
 
 const AmountSpan = styled.span`
-  font: 14px OpenSans-Regular; 
+  font: 14px OpenSans-Regular;
   color: #e74800;
 `;
 
@@ -68,14 +68,14 @@ const ScaleBlock = styled.div`
 `;
 
 const PercentsWrapper = styled.div`
-  position: relative; 
+  position: relative;
   height: 30px;
   width: 330px;
   overflow: hidden;
   border-radius: 15px;
   border: 1px solid #f4f4f6;
   background-color: #fafafa;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -111,7 +111,7 @@ const ButtonsHolder = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
-  
+
   & button:first-child {
     margin-right: 10px;
   }
@@ -139,7 +139,7 @@ class CancelPowerDown extends React.Component {
         <AmountField>
           Requested
           <AmountSpan>
-            {requestedPower} STEEM POWER
+            {requestedPower} BEX POWER
           </AmountSpan>
         </AmountField>
         <ScaleBlock>
@@ -153,13 +153,13 @@ class CancelPowerDown extends React.Component {
         <AmountField>
           Powered down
           <AmountSpan>
-            {payedPower} STEEM
+            {payedPower} BEX
           </AmountSpan>
         </AmountField>
         <BottomAmountField>
           Remaining
           <AmountSpan>
-            {remainedPayout} STEEM POWER
+            {remainedPayout} BEX POWER
           </AmountSpan>
         </BottomAmountField>
         <ActiveKeyField/>
@@ -174,8 +174,8 @@ class CancelPowerDown extends React.Component {
 
 const mapStateToProps = state => {
   const {to_withdraw, withdrawn} = state.wallet;
-  const toWithdraw = (SteemService.vestsToSp(to_withdraw) / 1000000);
-  const withdranPower = withdrawn ? (SteemService.vestsToSp(withdrawn) / 1000000) : 0;
+  const toWithdraw = (DPayService.vestsToBp(to_withdraw) / 1000000);
+  const withdranPower = withdrawn ? (DPayService.vestsToBp(withdrawn) / 1000000) : 0;
   const requestedPower = (toWithdraw + withdranPower).toFixed(3);
   const powerInPercents = parseFloat((withdranPower * 100 / requestedPower).toFixed(1));
   return {

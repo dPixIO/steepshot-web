@@ -13,7 +13,7 @@ class Tags extends React.Component {
 	getTags() {
 		if (!this.props.tags) return null;
 		return this.props.tags.map((tag, index) => {
-			if (tag === 'steepshot' || tag === '#steepshot') {
+			if (tag === 'dpix' || tag === '#dpix') {
 				return null;
 			}
 			tag = Utils.detransliterate(tag);

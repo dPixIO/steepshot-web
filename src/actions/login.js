@@ -27,7 +27,7 @@ export function clearLoginErrors() {
 	}
 }
 
-export function loginWithSteemConnect(params) {
+export function loginWithDPayId(params) {
 	const username = params.username;
 	const expiresIn = params['expires_in'] * 1000 + new Date().getTime();
 	const accessToken = params['access_token'];
@@ -36,12 +36,12 @@ export function loginWithSteemConnect(params) {
 		if (!username || !expiresIn || !accessToken) {
 			dispatch(push('/login'));
 			return {
-				type: 'LOGIN_WITH_STEEM_CONNECT_ERROR',
+				type: 'LOGIN_WITH_DPAYID_ERROR',
 				params
 			};
 		}
 		dispatch({
-			type: 'LOGIN_WITH_STEEM_CONNECT_REQUEST',
+			type: 'LOGIN_WITH_DPAYID_REQUEST',
 			params
 		});
 		if (global.isServerSide) {
@@ -51,10 +51,10 @@ export function loginWithSteemConnect(params) {
 			.then(response => {
 				const service = '';
 				let avatar = getAvatar(response[0]);
-				StorageService.setSteemConnectData(username, expiresIn, accessToken, avatar, service);
+				StorageService.setDPayIdData(username, expiresIn, accessToken, avatar, service);
 				initOneSignalService(username, dispatch);
 				dispatch({
-					type: 'LOGIN_WITH_STEEM_CONNECT_SUCCESS',
+					type: 'LOGIN_WITH_DPAYID_SUCCESS',
 					user: username,
 					accessToken,
 					avatar,
@@ -63,7 +63,7 @@ export function loginWithSteemConnect(params) {
 				});
 				dispatch(setService());
 				dispatch(push('/feed'));
-				dispatch(showMessage('Welcome to Steepshot, ' + username + '!'));
+				dispatch(showMessage('Welcome to dPix, ' + username + '!'));
 				LoggingService.logLogin();
 			})
 			.catch(error => {
@@ -77,7 +77,7 @@ function loginError(error) {
 	return dispatch => {
 		dispatch(pushErrorMessage(error));
 		dispatch({
-			type: 'LOGIN_WITH_STEEM_CONNECT_ERROR',
+			type: 'LOGIN_WITH_DPAYID_ERROR',
 			error
 		});
 		dispatch(hideBodyLoader());

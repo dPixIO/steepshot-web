@@ -3,9 +3,9 @@ const initialState = {
   amountError: '',
   selectedToken: 0,
   next_power_down: '',
-  sbd_rewards: 0,
-  steem_rewards: 0,
-  steem_power_rewards: 0,
+  bbd_rewards: 0,
+  dpay_rewards: 0,
+  dpay_power_rewards: 0,
   noRewards: true,
   tokenValue: [
     0,
@@ -42,7 +42,7 @@ export default function wallet(state = initialState, action) {
         ...state,
         tokenValue: [
           action.profile.balance,
-          action.profile.sbd_balance
+          action.profile.bbd_balance
         ]
       };
 

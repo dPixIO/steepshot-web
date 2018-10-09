@@ -32,7 +32,7 @@ class Post extends React.Component {
 		super(props);
 		if (this.props.imageUrl && this.props.imageUrl !== Constants.NO_IMAGE) {
 			ImagesService.getImagesWithProxy(this.props.imageUrl,
-				`https://steemitimages.com/${2 * Constants.DEF_POST_SIZE}x${2 * Constants.DEF_POST_SIZE}/`);
+				`https://dsiteimages.com/${2 * Constants.DEF_POST_SIZE}x${2 * Constants.DEF_POST_SIZE}/`);
 		}
 	}
 
@@ -209,10 +209,10 @@ class Post extends React.Component {
 
 const mapStateToProps = (state, props) => {
 	let post = state.posts[props.index];
-	let isGolosService = ChainService.usingGolos();
+	let isDWebService = ChainService.usingDWeb();
 	if (post) {
 		const media = post.media[0];
-		let linkToSinglePost = (isGolosService ? '/' + Constants.SERVICES.golos.name : '')
+		let linkToSinglePost = (isDWebService ? '/' + Constants.SERVICES.dweb.name : '')
 			+ '/post' + post.url.replace(/\/[\w-.]+/, '');
 		let isGallery = false;
 		if (post.media.length > 1) {

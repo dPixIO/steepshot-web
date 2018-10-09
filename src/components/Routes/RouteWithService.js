@@ -14,20 +14,20 @@ class RouteWithService extends React.Component {
 		if (!props.pathname) {
 			return;
 		}
-		if (props.pathname.includes('/' + Constants.SERVICES.golos.name)) {
-			props.setService(Constants.SERVICES.golos.name);
+		if (props.pathname.includes('/' + Constants.SERVICES.dweb.name)) {
+			props.setService(Constants.SERVICES.dweb.name);
 		}
-		if (!props.pathname.includes('/' + Constants.SERVICES.golos.name)
-			&& props.serviceName === Constants.SERVICES.golos.name) {
-			props.historyReplace('/golos' + props.pathname);
+		if (!props.pathname.includes('/' + Constants.SERVICES.dweb.name)
+			&& props.serviceName === Constants.SERVICES.dweb.name) {
+			props.historyReplace('/dweb' + props.pathname);
 		}
 	}
 
 	componentWillReceiveProps(nextProps) {
 		if (!Utils.equalsObjects(nextProps.pathname, this.props.pathname)
-			&& nextProps.serviceName === Constants.SERVICES.golos.name
-			&& !nextProps.pathname.includes('/' + Constants.SERVICES.golos.name)) {
-			this.props.historyReplace('/golos' + nextProps.pathname);
+			&& nextProps.serviceName === Constants.SERVICES.dweb.name
+			&& !nextProps.pathname.includes('/' + Constants.SERVICES.dweb.name)) {
+			this.props.historyReplace('/dweb' + nextProps.pathname);
 		}
 	}
 

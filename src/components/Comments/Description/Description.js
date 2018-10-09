@@ -34,7 +34,7 @@ class Description extends React.Component {
 	render() {
 		return (
 			<div className="container_description">
-				<ShowIf show={this.props.isSelfPost && !this.props.isGolos && !this.props.oldForPromote}>
+				<ShowIf show={this.props.isSelfPost && !this.props.isDWeb && !this.props.oldForPromote}>
 					<div className="open-promote_description centered--flex" onClick={this.openPromoteModal.bind(this)}>
 						PROMOTE THIS POST
 					</div>
@@ -56,7 +56,7 @@ const mapStateToProps = (state) => {
 	const post = state.posts[postIndex];
 	return {
 		postIndex,
-		isGolos: ChainService.usingGolos(),
+		isDWeb: ChainService.usingDWeb(),
 		isSelfPost: state.auth.user === post.author,
 		oldForPromote: post.postAge > 4
 	}

@@ -7,10 +7,10 @@ export function addMetaTags(tags) {
 
 export function getDefaultTags(hostname, pathname) {
 	return [
-		{property: 'og:title', content: "steepshot.io"},
+		{property: 'og:title', content: "dpix.io"},
 		{property: 'og:type', content: 'website'},
 		{property: 'og:url', content: hostname + pathname},
-		{property: 'og:image', content: hostname + '/images/steepshotLogo@2x.svg'}
+		{property: 'og:image', content: hostname + '/images/dpixLogo@2x.svg'}
 	]
 }
 

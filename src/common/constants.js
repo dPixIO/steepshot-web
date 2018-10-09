@@ -1,31 +1,31 @@
 const Constants = {
 	SERVICES: {
-		golos: {
-			name: 'golos',
-			baseUrl: 'https://golos.steepshot.org/api/v1_1',
-			loggingUrl: 'https://golos.steepshot.org/api/v1',
-			MAX_ACCEPTED_PAYOUT: '1000000.000 GBG',
-			PERCENT_STEEM_DOLLARS: 10000,
+		dweb: {
+			name: 'dweb',
+			baseUrl: 'https://api.dpix.network/api/v1_1',
+			loggingUrl: 'https://api.dpix.network/api/v1',
+			MAX_ACCEPTED_PAYOUT: '1000000.000 BBD',
+			PERCENT_DPAY_DOLLARS: 10000,
 			TAGS: {
 				MAX_LENGTH: 40,
 				MAX_AMOUNT: 5
 			},
 			tokensNames: [
-				'GOLOS', 'GBG'
+				'BEX', 'BBD'
 			]
 		},
-		steem: {
-			name: 'steem',
-			baseUrl: 'https://steepshot.org/api/v1_1',
-			loggingUrl: 'https://steepshot.org/api/v1',
-			MAX_ACCEPTED_PAYOUT: '1000000.000 SBD',
-			PERCENT_STEEM_DOLLARS: 10000,
+		dpay: {
+			name: 'dpay',
+			baseUrl: 'https://api.network/api/v1_1',
+			loggingUrl: 'https://api.network/api/v1',
+			MAX_ACCEPTED_PAYOUT: '1000000.000 BBD',
+			PERCENT_DPAY_DOLLARS: 10000,
 			TAGS: {
 				MAX_LENGTH: 40,
 				MAX_AMOUNT: 20
 			},
 			tokensNames: [
-				'STEEM', 'SBD'
+				'BEX', 'BBD'
 			]
 		},
 		BOTS: {
@@ -150,7 +150,7 @@ const Constants = {
 
 	TUTORIAL: {
 		PRE_TEXT: 'Also you can check ',
-		TEXT: 'how to sign in to Steepshot',
+		TEXT: 'how to sign in to dPix',
 		LINK: 'https://www.youtube.com/embed/XAVapBwbS1U?autoplay=1'
 	},
 
@@ -179,7 +179,7 @@ const Constants = {
 	},
 
 	DELETE: {
-		PUTATIVE_DELETED_POST: 'https://steemitimages.com/DQmd4wyZvtAUifJDLZD9vaqek17S1cUhN3PyEbFMMMgLW8o/Steepshot_footer2.PNG',
+		PUTATIVE_DELETED_POST: 'https://dsiteimages.com/DQmd4wyZvtAUifJDLZD9vaqek17S1cUhN3PyEbFMMMgLW8o/Steepshot_footer2.PNG',
 		DELETE_POST_SUCCESS: 'The post has been successfully deleted. If you still see your post, please give it a few minutes to sync from the blockchain.',
 		DELETE_COMMENT_SUCCESS: 'The comment has been successfully deleted. If you still see your comment, please give' +
 		' it a few minutes to sync from the blockchain.',
@@ -228,19 +228,18 @@ const Constants = {
 	},
 
 	BLOCKCHAIN: {
-		golos: {
+		dweb: {
 			CONNECTION_SERVERS: [
-				"wss://ws.golos.io"
+				"wss://greatchain.dpays.io"
 			],
-			PREFIX: 'GLS',
-			CHAIN_ID: '782a3039b478c839e4cb0c941ff4eaeb7df40bdd68bd441afd444b9da763de12'
+			PREFIX: 'DWB',
+			CHAIN_ID: '38f14b346eb697ba04ae0f5adcfaa0a437ed3711197704aa256a14cb9b4a8f26'
 		},
 
-		steem: {
+		dpay: {
 			CONNECTION_SERVERS: [
-				//'https://steemd.steepshot.org', don't working
-				'https://api.steemit.com',
-				//'https://api.steemitstage.com' don't working
+				'https://api.dpays.io',
+				'https://dpayapi.com',
 			]
 		}
 	},
@@ -269,7 +268,7 @@ const Constants = {
 		BID_TO_BOT_SUCCESS: 'Your bid has been successfully sent.',
 		TRANSFER_SUCCESS: 'Transaction completed successfully!',
 		MIN_AMOUNT: 0.001,
-		MIN_LEAVE_STEEM_POWER: 5
+		MIN_LEAVE_DPAY_POWER: 5
 	},
 
 	WALLET: {

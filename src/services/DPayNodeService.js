@@ -1,21 +1,21 @@
-import steem from 'steem';
+import dpay from 'dpayjs';
 import Constants from '../common/constants';
 
 const MAX_COUNT_TRY = 3;
 let currentNode = 0;
-const NODE_LIST = Constants.BLOCKCHAIN.steem.CONNECTION_SERVERS;
+const NODE_LIST = Constants.BLOCKCHAIN.dpay.CONNECTION_SERVERS;
 
 
-class SteemNodeService {
+class DPayNodeService {
 
 	static initConfig() {
-		steem.api.setOptions({url: NODE_LIST[currentNode]});
+		dpay.api.setOptions({url: NODE_LIST[currentNode]});
 	}
 
 	static switchNode() {
 		let infoMsg = `switch node from ${NODE_LIST[currentNode]} to `;
 		currentNode = (currentNode + 1) % NODE_LIST.length;
-		steem.api.setOptions({url: NODE_LIST[currentNode]});
+		dpay.api.setOptions({url: NODE_LIST[currentNode]});
 		infoMsg += NODE_LIST[currentNode];
 		console.log(infoMsg);
 	}
@@ -26,7 +26,7 @@ class SteemNodeService {
 
 	setNextNode() {
 		this.countTry++;
-		SteemNodeService.switchNode();
+		DPayNodeService.switchNode();
 	}
 
 	isMaxCountRequests() {
@@ -34,4 +34,4 @@ class SteemNodeService {
 	}
 }
 
-export default SteemNodeService;
+export default DPayNodeService;

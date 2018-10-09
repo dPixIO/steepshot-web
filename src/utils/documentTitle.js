@@ -24,10 +24,8 @@ export function documentTitle() {
 	titleArr[0] = titleArr[0].toUpperCase();
 	if (title.match(/[A-Z]/g) !== null) {
 		titleArr.splice(title.search(/[A-Z]/g), 0, ' ');
-		return document.title = `${titleArr.join('')} | Steepshot`
+		return document.title = `${titleArr.join('')} | dPix`
 	} else {
-		return document.title = `${titleArr.join('')} | Steepshot`
+		return document.title = `${titleArr.join('')} | dPix`
 	}
 }
-
-

@@ -12,7 +12,7 @@ class StorageService {
     storage.activeKey = null;
 	}
 
-	static setSteemConnectData(username, expiresIn, accessToken, avatar, service) {
+	static setDPayIdData(username, expiresIn, accessToken, avatar, service) {
 		storage.username = username;
 		storage.expiresIn = expiresIn;
 		storage.accessToken = accessToken;

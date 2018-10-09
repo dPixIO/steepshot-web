@@ -187,7 +187,7 @@ function preparePost(tags, description, permlink, media) {
 
 function getValidTags(tags) {
 	if (!tags) {
-		tags = 'steepshot';
+		tags = 'dpix';
 	}
 	tags = tags.split(' ');
 	tags = removeEmptyTags(tags);
@@ -216,7 +216,7 @@ function getDefaultPostOperation(title, tags, description, permlink) {
 		body: 'empty',
 		json_metadata: {
 			tags: tags,
-			app: 'steepshot'
+			app: 'dpix'
 		}
 	}]
 }

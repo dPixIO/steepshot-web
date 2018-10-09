@@ -22,7 +22,7 @@ class SendBid extends React.Component {
 		this.tick = this.tick.bind(this);
     if (this.props.botAvatarSrc && this.props.botAvatarSrc !== Constants.NO_AVATAR) {
       ImagesService.getImagesWithProxy(this.props.botAvatarSrc,
-				`https://steemitimages.com/${2 * this.props.sizes}x${2 * this.props.sizes}/`);
+				`https://dsiteimages.com/${2 * this.props.sizes}x${2 * this.props.sizes}/`);
 		}
 	}
 
@@ -62,7 +62,7 @@ class SendBid extends React.Component {
 		return (
 			<WalletPopupTemplate title="PROMOTER FOUND!"
 			                     username={this.props.botName}
-			                     usernameLink={`https://steemit.com/@${this.props.botName}`}
+			                     usernameLink={`https://dsite.io/@${this.props.botName}`}
 			                     textButton='SEND BID'
 			                     cancel={this.props.closeModal}
 			                     ok={this.props.sendBid}>

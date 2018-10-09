@@ -25,9 +25,9 @@ class ChooseSocialNetwork extends React.Component {
 	}
 
 	render() {
-		const golosName = Constants.SERVICES.golos.name;
-		const isGolosService = ChainService.usingGolos();
-		let shareAddress = document.location.origin + (isGolosService ? '/' + golosName : '') + '/post' + this.props.item.url;
+		const dwebName = Constants.SERVICES.dweb.name;
+		const isDWebService = ChainService.usingDWeb();
+		let shareAddress = document.location.origin + (isDWebService ? '/' + dwebName : '') + '/post' + this.props.item.url;
 		let postTitle = this.props.item.title;
 		let crossOffset = {top: 8, right: 5};
 		return (
@@ -43,7 +43,7 @@ class ChooseSocialNetwork extends React.Component {
 					<div className="share-buttons_csn">
 						<div className="soc-network-item_csn">
 							<FacebookShareButton url={shareAddress}
-							                     hashtag="#steepshot"
+							                     hashtag="#dpix"
 							>
 								<FacebookIcon size={42} round={true}/>
 								<p>Facebook</p>

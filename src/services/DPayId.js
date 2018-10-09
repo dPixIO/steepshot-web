@@ -1,16 +1,16 @@
-import sc2 from 'sc2-sdk';
+import dpid from 'dpayid';
 import AuthService from './AuthService';
-import SteemService from './SteemService';
+import DPayService from './DPayService';
 
 const location = window.location;
-const callbackURL = `${location.origin}/steemConnect`;
-const api = sc2.Initialize({
-  app: 'dev.steepshot',
+const callbackURL = `${location.origin}/dPayId`;
+const api = dpid.Initialize({
+  app: 'dev.dpix.io',
   callbackURL,
   scope: ['login', 'offline', 'vote', 'comment', 'delete_comment', 'comment_options', 'custom_json', 'claim_reward_balance']
 });
 
-class SteemConnect {
+class DPayId {
 
   static getLoginUrl() {
     return api.getLoginURL();
@@ -22,7 +22,7 @@ class SteemConnect {
 
   addCommentToBlockchain(commentOperation) {
     let beneficiaries = this.getBeneficiaries(commentOperation[1].permlink, [{
-      account: 'steepshot',
+      account: 'dpix',
       weight: 1000
     }]);
     const operations = [commentOperation, beneficiaries];
@@ -70,13 +70,13 @@ class SteemConnect {
     location.assign(powerDownLink);
   }
 
-  claimRewards(steem_tokens, sbd_tokens, steem_power) {
-    return api.claimRewardBalance(AuthService.getUsername(), steem_tokens, sbd_tokens, steem_power)
+  claimRewards(dpay_tokens, bbd_tokens, dpay_power) {
+    return api.claimRewardBalance(AuthService.getUsername(), dpay_tokens, bbd_tokens, dpay_power)
       .then(() => {return Promise.resolve()});
   }
 
   getAccounts(username) {
-    return new SteemService().getAccounts(username);
+    return new DPayService().getAccounts(username);
   }
 
   wifIsValid() {
@@ -88,12 +88,12 @@ class SteemConnect {
   }
 
   getBeneficiaries(permlink, beneficiaries) {
-    return new SteemService().getBeneficiaries(permlink, beneficiaries);
+    return new DPayService().getBeneficiaries(permlink, beneficiaries);
   }
 
   getTransactionHistory(username, from, limit) {
-    return new SteemService().getTransactionHistory(username, from, limit);
+    return new DPayService().getTransactionHistory(username, from, limit);
   }
 }
 
-export default SteemConnect;
+export default DPayId;

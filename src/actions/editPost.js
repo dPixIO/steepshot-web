@@ -286,7 +286,7 @@ function getValidTagsString(str) {
   const state = getStore().getState();
   const serviceName = state.services.name;
   if (str) {
-    let result = str.replace(/\bsteepshot\b/g, '');
+    let result = str.replace(/\bdpix\b/g, '');
     result = result.replace(/(\s+)-+/g, '$1');
     result = result.replace(/-+(\s+)/g, '$1');
     if (!state.editPost.tags) {

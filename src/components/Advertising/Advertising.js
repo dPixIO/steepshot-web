@@ -22,8 +22,7 @@ class Advertising extends React.Component {
 				<div className="wrapper_advertising centered--flex">
 					<div className="sub-wrapper_advertising">
 						<div className="text-wrapper_advertising">
-							<p>Steepshot is looking for a Seed stage investment. If you’re interested, please contact us for more
-								details at pc@steepshot.io</p>
+							<p>dPix just launched! Not much data here, so get started earning BEX posting some!</p>
 						</div>
 						<div className="close-wrapper_advertising centered--flex"
 						     onClick={this.setAdvertisingStatus.bind(this, true)}>

@@ -56,7 +56,7 @@ export function login(username, postingKey) {
 							return Promise.reject(Constants.AUTH_WRONG_POSTING_KEY);
 						}
 						let avatar = getAvatar(response[0]);
-						StorageSerive.setAuthData(username, postingKey, avatar, getStore().getState().services.name || Constants.SERVICES.steem.name);
+						StorageSerive.setAuthData(username, postingKey, avatar, getStore().getState().services.name || Constants.SERVICES.dpay.name);
 						initOneSignalService(username, dispatch);
 						dispatch({
 							type: 'LOGIN_SUCCESS',
@@ -67,7 +67,7 @@ export function login(username, postingKey) {
 							voting_power: response[0].voting_power / 100
 						});
 						dispatch(push('/feed'));
-						dispatch(showMessage(`Welcome to Steepshot, ${username}!`));
+						dispatch(showMessage(`Welcome to dPix, ${username}!`));
 						LoggingService.logLogin();
 					})
 			})
@@ -105,7 +105,7 @@ export function logout() {
 		StorageSerive.clearAuthData();
 		OneSignalService.removeNotificationTags();
 		dispatch(logoutUser());
-		dispatch(setService('steem'));
+		dispatch(setService('dpay'));
 		dispatch(push(`/browse`));
 	}
 }

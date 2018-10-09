@@ -1,29 +1,29 @@
 import Constants from '../common/constants';
 import ChainService from './ChainService';
-import SteemService from './SteemService';
-import GolosService from './GolosService';
+import DPayService from './DPayService';
+import DWebService from './DWebService';
 import AuthService from './AuthService';
-import SteemConnect from './SteemConnect';
+import DPayId from './DPayId';
 import Utils from '../utils/Utils';
 
-let config = Constants.SERVICES.steem;
+let config = Constants.SERVICES.dpay;
 
 class RequestService {
 
 	static init(serviceName) {
 		switch (serviceName) {
-			case Constants.SERVICES.golos.name:
-				ChainService.init(new GolosService());
-				config = Constants.SERVICES.golos;
+			case Constants.SERVICES.dweb.name:
+				ChainService.init(new DWebService());
+				config = Constants.SERVICES.dweb;
 				break;
-			case Constants.SERVICES.steem:
+			case Constants.SERVICES.dpay:
 			default:
-				let steemService = SteemService;
+				let dpayService = DPayService;
 				if (AuthService.isAuthWithToken()) {
-					steemService = SteemConnect;
+					dpayService = DPayId;
 				}
-				ChainService.init(new steemService());
-				config = Constants.SERVICES.steem;
+				ChainService.init(new dpayService());
+				config = Constants.SERVICES.dpay;
 				break;
 		}
 	}

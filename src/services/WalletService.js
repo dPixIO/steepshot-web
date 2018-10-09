@@ -20,7 +20,7 @@ class WalletService {
       });
   }
 
-  static steemConnectTransfer(amount, token, to, memo = '') {
+  static dPayIdTransfer(amount, token, to, memo = '') {
     return checkRecipient(to)
       .then(() => checkAmount(amount))
       .then(() => {
@@ -37,15 +37,15 @@ class WalletService {
     return checkActiveKey(activeKey)
       .then(() => checkAmount(amount))
       .then(() => {
-        const token = ChainService.usingGolos() ? 'GOLOS' : 'STEEM';
+        const token = ChainService.usingDWeb() ? 'BEX' : 'BEX';
         return ChainService.powerUp(activeKey, getValidAmountFormat(amount, token));
       });
   }
 
-  static powerUpSteemConnect(amount) {
+  static powerUpDPayId(amount) {
     return checkAmount(amount)
       .then(() => {
-        const token = 'STEEM';
+        const token = 'BEX';
         const powerUpInfo = {
           to: AuthService.getUsername(),
           amount: getValidAmountFormat(amount, token),
@@ -58,7 +58,7 @@ class WalletService {
     return checkActiveKey(activeKey)
       .then(() => checkAmount(amount, 1))
       .then(() => {
-        const token = ChainService.usingGolos() ? 'GESTS' : 'VESTS';
+        const token = ChainService.usingDWeb() ? 'GESTS' : 'VESTS';
         return ChainService.powerDown(activeKey, getValidAmountFormat(amount, token, true));
       });
   }
@@ -66,12 +66,12 @@ class WalletService {
   static cancelPowerDown(activeKey, amount) {
     return checkActiveKey(activeKey)
       .then(() => {
-        const token = ChainService.usingGolos() ? 'GESTS' : 'VESTS';
+        const token = ChainService.usingDWeb() ? 'GESTS' : 'VESTS';
         return ChainService.powerDown(activeKey, amount + ' ' + token);
       })
   }
 
-  static powerDownSteemConnect(amount) {
+  static powerDownDPayId(amount) {
     return checkAmount(amount, 1)
       .then(() => {
         const token = 'VESTS';
@@ -83,7 +83,7 @@ class WalletService {
       })
   }
 
-  static cancelPowerDownSteemConnect(amount) {
+  static cancelPowerDownDPayId(amount) {
     const powerDownInfo = {
       account: AuthService.getUsername(),
       vesting_shares: amount + ' VESTS',

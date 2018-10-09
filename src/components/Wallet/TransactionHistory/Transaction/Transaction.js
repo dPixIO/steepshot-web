@@ -2,7 +2,7 @@ import React from 'react';
 import './transaction.css';
 import TimeAgo from 'timeago-react';
 import DateFormatter from '../../../../utils/DateFormatter';
-import SteemService from '../../../../services/SteemService';
+import DPayService from '../../../../services/DPayService';
 import AuthService from '../../../../services/AuthService';
 import ShowIf from '../../../Common/ShowIf';
 import Utils from '../../../../utils/Utils';
@@ -83,24 +83,24 @@ function getOperationBody(operation, data) {
         </div>
       );
     case 'claim_reward_balance':
-      const isEmptySteem = /^0\.000/.test(data.reward_steem);
-      const isEmptySBD = /^0\.000/.test(data.reward_sbd);
+      const isEmptyDPay = /^0\.000/.test(data.reward_dpay);
+      const isEmptyBBD = /^0\.000/.test(data.reward_bbd);
       return (
         <div className="info_trx">
-          {wrap(data.reward_steem)}
-          {isEmptySteem || isEmptySBD ? '' : (<span>,&nbsp;</span>)}
-          {wrap(data.reward_sbd)}
-          {isEmptySteem && isEmptySBD ? '' : (<span>&nbsp;and&nbsp;</span>)}
-          {wrap(SteemService.vestsToSp(data.reward_vests) + ' STEEM POWER')}
+          {wrap(data.reward_dpay)}
+          {isEmptyDPay || isEmptyBBD ? '' : (<span>,&nbsp;</span>)}
+          {wrap(data.reward_bbd)}
+          {isEmptyDPay && isEmptyBBD ? '' : (<span>&nbsp;and&nbsp;</span>)}
+          {wrap(DPayService.vestsToBp(data.reward_vests) + ' BEX POWER')}
         </div>
       );
     case 'withdraw_vesting':
-      const isEmptySteemPowerDown = /^0\.000/.test(data.vesting_shares);
-      const steemAmountPowerDown = <span>Start power down of&nbsp;
-        {wrap(SteemService.vestsToSp(data.vesting_shares) + ' STEEM', false)}</span>;
+      const isEmptyDPayPowerDown = /^0\.000/.test(data.vesting_shares);
+      const dpayAmountPowerDown = <span>Start power down of&nbsp;
+        {wrap(DPayService.vestsToBp(data.vesting_shares) + ' BEX', false)}</span>;
       return (
         <div className="info_trx">
-          {isEmptySteemPowerDown ? 'Cancel power down' : steemAmountPowerDown}
+          {isEmptyDPayPowerDown ? 'Cancel power down' : dpayAmountPowerDown}
         </div>
       );
     case 'transfer_to_vesting':

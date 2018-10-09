@@ -18,18 +18,18 @@ import CancelPowerDown from '../Modals/CancelPowerDown/CancelPowerDown';
 //import {addAndStringToLastItem} from '../../utils/addAndStringToLastItem';
 
 const DESCRIPTION = {
-  STEEM: `Tradeable tokens that may be transferred anywhere at anytime.
-Steem can be converted to STEEM POWER in a process called powering up.`,
-  SP: `Influence tokens which give you more control over post payouts 
+  BEX: `Tradeable tokens that may be transferred anywhere at anytime.
+  DPay  can be converted to BEX POWER in a process called powering up.`,
+  BP: `Influence tokens which give you more control over post payouts
 	and allow you to earn on curation rewards.`,
-  SBD: `Tradeable tokens that may be transferred anywhere at anytime.`,
-  GOLOS: `Перемещаемые цифровые токены, которые могут переданы куда угодно 
-	в любой момент. Голос может быть конвертирован в Силу Голоса, этот процесс 
+  BBD: `Tradeable tokens that may be transferred anywhere at anytime.`,
+  BEX: `Перемещаемые цифровые токены, которые могут переданы куда угодно
+	в любой момент. Голос может быть конвертирован в Силу Голоса, этот процесс
 	называется "увеличение Силы Голоса".`,
-  SG: `Сила Голоса неперемещаемая, её количество увеличивается при долгосрочном 
-	хранении. Чем больше у Вас Силы Голоса, тем сильней вы влияете на вознаграждения 
+  BP: `Сила Голоса неперемещаемая, её количество увеличивается при долгосрочном
+	хранении. Чем больше у Вас Силы Голоса, тем сильней вы влияете на вознаграждения
 	за пост и тем больше зарабатываете за голосование.`,
-  GBG: `Перемещаемые цифровые токены, цена которых равна ~1 мг золота в GOLOS.`
+  BBD: `Перемещаемые цифровые токены, цена которых равна ~1 мг золота в GOLOS.`
 };
 
 class Wallet extends React.Component {
@@ -38,7 +38,7 @@ class Wallet extends React.Component {
     super();
     props.getUserProfile();
     props.getAccountsSelectiveData();
-    this.transferSteem = this.transferSteem.bind(this);
+    this.transferDPay = this.transferDPay .bind(this);
     this.powerUp = this.powerUp.bind(this);
     this.powerDown = this.powerDown.bind(this);
     this.cancelPowerDown = this.cancelPowerDown.bind(this);
@@ -53,12 +53,12 @@ class Wallet extends React.Component {
     this.props.openModal("Transfer", modalOption);
   }
 
-  transferSteem() {
+  transferDPay () {
     this.props.setToken(0);
     this.transfer();
   }
 
-  transferSbd() {
+  transferBbd() {
     this.props.setToken(1);
     this.transfer();
   }
@@ -85,16 +85,16 @@ class Wallet extends React.Component {
   }
 
   claimAccountRewards() {
-    this.props.claimAccountRewards(this.props.steem_rewards, this.props.sbd_rewards, this.props.steem_power_rewards_in_vests);
+    this.props.claimAccountRewards(this.props.dpay_rewards, this.props.bbd_rewards, this.props.dpay_power_rewards_in_vests);
   }
 
-  renderClaimRewards(sbd_rewards, steem_rewards, steem_power_rewards) {
+  renderClaimRewards(bbd_rewards, dpay_rewards, dpay_power_rewards) {
     if (this.props.mobileScreen) {
       return (
         <div className="centered--flex">
           <div className="mobile-claim-rewards-wrapper_wallet">
             <div className="text-claim-reward_wallet">{/*Current rewards:&nbsp;
-							{addAndStringToLastItem([sbd_rewards, steem_rewards, steem_power_rewards])}*/}
+							{addAndStringToLastItem([bbd_rewards, dpay_rewards, dpay_power_rewards])}*/}
               Hello. It's time to claim rewards!
             </div>
             <button className="button_widget-token" onClick={this.claimAccountRewards}>CLAIM REWARDS NOW</button>
@@ -108,7 +108,7 @@ class Wallet extends React.Component {
           <div className="centered--flex">
             <div className="gift-boxes_wallet"/>
             <div className="text-claim-reward_wallet">{/*Current rewards:&nbsp;
-              {addAndStringToLastItem([sbd_rewards, steem_rewards, steem_power_rewards])}*/}
+              {addAndStringToLastItem([bbd_rewards, dpay_rewards, dpay_power_rewards])}*/}
               Hello. It's time to claim rewards!
             </div>
           </div>
@@ -120,17 +120,17 @@ class Wallet extends React.Component {
 
   render() {
     const {
-      cost, steem, sp, sbd, isGolosService, sbd_rewards, steem_rewards, steem_power_rewards,
+      cost, dpay, bp, bbd, isDWebService, bbd_rewards, dpay_rewards, dpay_power_rewards,
       noRewards, isPoweringDown
     } = this.props;
-    if (Utils.isEmpty(cost) || Utils.isEmpty(steem) || Utils.isEmpty(sp) || Utils.isEmpty(sbd)) {
+    if (Utils.isEmpty(cost) || Utils.isEmpty(dpay) || Utils.isEmpty(bp) || Utils.isEmpty(bbd)) {
       return global.isServerSide ? null : <LoadingSpinner center={true}/>;
     }
     return (
       <div className="container">
         <div className="container_wallet">
           <ShowIf show={!noRewards}>
-            {this.renderClaimRewards(sbd_rewards, steem_rewards, steem_power_rewards)}
+            {this.renderClaimRewards(bbd_rewards, dpay_rewards, dpay_power_rewards)}
           </ShowIf>
           <div className="header_wallet">
             <div className="title_wallet">
@@ -143,24 +143,24 @@ class Wallet extends React.Component {
           <div className="body_wallet">
             <WidgetToken
               background={{
-                image: '/images/wallet/steem.png',
+                image: '/images/wallet/dpay.png',
                 color: 'rgb(74, 144, 226)'
               }}
-              fullName={isGolosService ? 'ГОЛОС' : 'STEEM'}
-              point="steem"
-              coin={isGolosService ? 'GOLOS' : 'STEEM'}
-              value={steem}
-              description={isGolosService ? DESCRIPTION.GOLOS : DESCRIPTION.STEEM}
-              actions={isGolosService ?
+              fullName={isDWebService ? 'DWEB' : 'DPAY'}
+              point="dpay"
+              coin={isDWebService ? 'BEX' : 'BEX'}
+              value={dpay}
+              description={isDWebService ? DESCRIPTION.DWEB : DESCRIPTION.DPAY}
+              actions={isDWebService ?
                 [{
                   label: 'Transfer',
                   icon: '/images/wallet/buttons/transfer.svg',
-                  onClick: this.transferSteem
+                  onClick: this.transferDPay
                 }] :
                 [{
                   label: 'Transfer',
                   icon: '/images/wallet/buttons/transfer.svg',
-                  onClick: this.transferSteem
+                  onClick: this.transferDPay
                 }, {
                   label: 'Power up',
                   icon: '/images/wallet/buttons/powerUp.svg',
@@ -170,15 +170,15 @@ class Wallet extends React.Component {
             />
             <WidgetToken
               background={{
-                image: '/images/wallet/sp.png',
+                image: '/images/wallet/bp.png',
                 color: 'rgb(103, 184, 47)'
               }}
-              fullName={isGolosService ? 'СИЛА ГОЛОСА' : 'STEEM POWER'}
-              point="sp"
-              coin={isGolosService ? 'GOLOS' : 'STEEM'}
-              value={sp}
-              description={isGolosService ? DESCRIPTION.SG : DESCRIPTION.SP}
-              actions={isGolosService ? [] :
+              fullName={isDWebService ? 'BEX POWER' : 'BEX POWER'}
+              point="bp"
+              coin={isDWebService ? 'BEX' : 'BEX'}
+              value={bp}
+              description={isDWebService ? DESCRIPTION.SG : DESCRIPTION.BP}
+              actions={isDWebService ? [] :
                 [{
                   label: 'Power up',
                   icon: '/images/wallet/buttons/powerUp.svg',
@@ -197,25 +197,25 @@ class Wallet extends React.Component {
             />
             <WidgetToken
               background={{
-                image: '/images/wallet/sbd.png',
+                image: '/images/wallet/bbd.png',
                 color: 'rgb(218, 146, 44)'
               }}
-              fullName={isGolosService ? 'ЗОЛОТОЙ' : 'STEEM DOLLARS'}
-              point="sbd"
-              coin={isGolosService ? 'GBG' : 'SBD'}
-              value={sbd}
-              description={isGolosService ? DESCRIPTION.GBG : DESCRIPTION.SBD}
+              fullName={isDWebService ? 'BEX DOLLARS' : 'BEX DOLLARS'}
+              point="bbd"
+              coin={isDWebService ? 'BBD' : 'BBD'}
+              value={bbd}
+              description={isDWebService ? DESCRIPTION.GBG : DESCRIPTION.BBD}
               textButton="TRANSFER"
               actions={
                 [{
                   label: 'Transfer',
                   icon: '',
-                  onClick: this.transferSbd.bind(this)
+                  onClick: this.transferBbd.bind(this)
                 }]
               }
             />
           </div>
-          <ShowIf show={!isGolosService}>
+          <ShowIf show={!isDWebService}>
             <TransactionHistory/>
           </ShowIf>
         </div>
@@ -228,23 +228,23 @@ const mapStateToProps = state => {
   if (!state.userProfile.profile) {
     return {};
   }
-  const {balance, sbd_balance, total_steem_power_steem, estimated_balance} = state.userProfile.profile;
+  const {balance, bbd_balance, total_dpay_power_dpay, estimated_balance} = state.userProfile.profile;
   const {
-    sbd_rewards, steem_rewards, steem_power_rewards, steem_power_rewards_in_vests, noRewards,
+    bbd_rewards, dpay_rewards, dpay_power_rewards, dpay_power_rewards_in_vests, noRewards,
     next_power_down
   } = state.wallet;
-  const isGolosService = ChainService.usingGolos();
+  const isDWebService = ChainService.usingDWeb();
   return {
-    isGolosService,
+    isDWebService,
     cost: estimated_balance,
-    steem: balance,
+    dpay: balance,
     isPoweringDown: !!next_power_down,
-    sp: total_steem_power_steem,
-    sbd: sbd_balance,
-    sbd_rewards: sbd_rewards ? (sbd_rewards + ' SBD') : '',
-    steem_rewards: steem_rewards ? (steem_rewards + ' STEEM') : '',
-    steem_power_rewards: steem_power_rewards ? (steem_power_rewards + ' STEEM POWER') : '',
-    steem_power_rewards_in_vests: steem_power_rewards_in_vests ? (steem_power_rewards_in_vests + ' VESTS') : '',
+    bp: total_dpay_power_dpay,
+    bbd: bbd_balance,
+    bbd_rewards: bbd_rewards ? (bbd_rewards + ' BBD') : '',
+    dpay_rewards: dpay_rewards ? (dpay_rewards + ' BEX') : '',
+    dpay_power_rewards: dpay_power_rewards ? (dpay_power_rewards + ' BEX POWER') : '',
+    dpay_power_rewards_in_vests: dpay_power_rewards_in_vests ? (dpay_power_rewards_in_vests + ' VESTS') : '',
     noRewards,
     mobileScreen: state.window.width <= 650
   };
@@ -264,8 +264,8 @@ const mapDispatchToProps = dispatch => {
     getAccountsSelectiveData: () => {
       dispatch(getAccountsSelectiveData());
     },
-    claimAccountRewards: (steem_tokens, sbd_tokens, steem_power) => {
-      dispatch(claimAccountRewards(steem_tokens, sbd_tokens, steem_power));
+    claimAccountRewards: (dpay_tokens, bbd_tokens, dpay_power) => {
+      dispatch(claimAccountRewards(dpay_tokens, bbd_tokens, dpay_power));
     }
   };
 };

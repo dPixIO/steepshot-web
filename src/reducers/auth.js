@@ -43,7 +43,7 @@ export default function auth(state = initialState, action) {
 				accessToken: null
 			};
 
-		case 'LOGIN_WITH_STEEM_CONNECT_ERROR':
+		case 'LOGIN_WITH_DPAYID_ERROR':
 		case 'LOGOUT_SUCCESS':
 		case 'LOGIN_ERROR':
 			return {
@@ -56,7 +56,7 @@ export default function auth(state = initialState, action) {
 				accessToken: null
 			};
 
-		case 'LOGIN_WITH_STEEM_CONNECT_SUCCESS':
+		case 'LOGIN_WITH_DPAYID_SUCCESS':
 			return {
 				...state,
 				user: action.user,

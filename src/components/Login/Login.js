@@ -10,9 +10,9 @@ import Constants from '../../common/constants';
 import {switchService} from '../../actions/services';
 import {clearLoginErrors} from '../../actions/login';
 import Switcher from '../Switcher/Switcher';
-import ChooseSteemRegModal from './ChooseSteemRegModal/ChooseSteemRegModal';
+import ChooseDPayRegModal from './ChooseDPayRegModal/ChooseDPayRegModal';
 import {openModal} from '../../actions/modal';
-import SteemConnect from '../../services/SteemConnect';
+import DPayId from '../../services/DPayId';
 import GrayInput from '../Common/GrayInput/GrayInput';
 
 const galleryImages = [
@@ -41,13 +41,13 @@ class Login extends React.Component {
 
 	openRegisterSite(event) {
 		event.preventDefault();
-		if (this.props.chooseSteem) {
+		if (this.props.chooseDPay) {
 			let modalOption = {
-				body: (<ChooseSteemRegModal/>),
+				body: (<ChooseDPayRegModal/>),
 			};
-			this.props.openModal('ChooseSteemRegModal', modalOption);
+			this.props.openModal('ChooseDPayRegModal', modalOption);
 		} else {
-			window.open('https://golos.io/create_account');
+			window.open('https://signup.dsite.io');
 		}
 	}
 
@@ -61,9 +61,9 @@ class Login extends React.Component {
 		this.props.login(nameValue.toLowerCase(), passwordValue);
 	}
 
-	loginWithSteemConnect() {
-		SteemConnect.getLoginUrl();
-		window.location.assign(SteemConnect.getLoginUrl() + '&expires_in=604800');
+	loginWithDPayId() {
+		DPayId.getLoginUrl();
+		window.location.assign(DPayId.getLoginUrl() + '&expires_in=604800');
 	}
 
 	clearLoginErrors() {
@@ -74,7 +74,7 @@ class Login extends React.Component {
 	}
 
 	render() {
-		const {chooseSteem, usernameError, postingKeyError} = this.props;
+		const {chooseDPay, usernameError, postingKeyError} = this.props;
 		return (
 			<div className="container_login">
 				<ShowIf show={!this.props.isMobileScreen}>
@@ -83,7 +83,7 @@ class Login extends React.Component {
 						<div className="gallery-shadow_login"/>
 						<div className="welcome-body_login">
 							<div className="welcome-title_login">
-								Welcome to Steepshot
+								Welcome to dPix
 							</div>
 							<div className="welcome-description_login">
 								Platform that rewards people for sharing their lifestyle and visual experience
@@ -100,7 +100,7 @@ class Login extends React.Component {
 					<div className="form-body_login">
 						<form className="form_login">
 							<div className="title_login">
-								Sign in to Steepshot
+								Sign in to dPix
 							</div>
 							<div className="input-block_login">
 								<GrayInput type="text" label="Username" placeholder="username" ref={ref => this.name = ref}
@@ -115,9 +115,9 @@ class Login extends React.Component {
 										this.clearLoginErrors();
 										this.props.switchService();
 									}}
-									left={chooseSteem}
-									leftLabel="Steem"
-									rightLabel="Golos"
+									left={chooseDPay}
+									leftLabel="dPay"
+									rightLabel="dPay"
 								/>
 								<button className="sign_login btn btn-default" onClick={this.handleLogin.bind(this)} type="submit">
 									LOGIN
@@ -125,15 +125,15 @@ class Login extends React.Component {
 							</div>
 						</form>
 					</div>
-					<div className={'registration-block_login login-steem-con-block_login' +
-					(chooseSteem ? '' : ' hide-log-ste-con-block_login')}>
+					<div className={'registration-block_login login-dpay-con-block_login' +
+					(chooseDPay ? '' : ' hide-log-ste-con-block_login')}>
 						<label>Don’t you trust us?</label>
-						<button className="steem-con-btn_login" onClick={this.loginWithSteemConnect.bind(this)}>
-							{(this.props.isMobileScreen ? '' : 'LOGIN WITH ') + 'STEEM CONNECT'}
+						<button className="dpay-con-btn_login" onClick={this.loginWithDPayId.bind(this)}>
+							{(this.props.isMobileScreen ? '' : 'LOGIN WITH ') + 'DPAYID'}
 						</button>
 					</div>
 					<div className="registration-block_login">
-						<label>Don’t have a {chooseSteem ? 'Steem' : 'Golos'} account?</label>
+						<label>Don’t have a {chooseDPay ? 'dPay' : 'dWeb'} account?</label>
 						<button className="guidelines-btn_login create-acc_login" onClick={this.openRegisterSite.bind(this)}>
 							REGISTRATION
 						</button>
@@ -148,7 +148,7 @@ const mapStateToProps = (state) => {
 	return {
 		user: state.auth.user,
 		isMobileScreen: state.window.isMobileScreen,
-		chooseSteem: state.services.name === Constants.SERVICES.steem.name,
+		chooseDPay: state.services.name === Constants.SERVICES.dpay.name,
 		usernameError: state.login.usernameError,
 		postingKeyError: state.login.postingKeyError
 	};

@@ -26,9 +26,9 @@ export function addImageLink(originalUrl, proxyError, originalError) {
 	}
 	if (!proxyError && !originalError) {
 		proxyUrl = {
-			[defaultAvaSize]: `https://steemitimages.com/${2 * defaultAvaSize}x${2 * defaultAvaSize}/` + originalUrl,
-			[userCardAvaSize]: `https://steemitimages.com/${2 * userCardAvaSize}x${2 * userCardAvaSize}/` + originalUrl,
-			[userProfAvaSize]: `https://steemitimages.com/${2 * userProfAvaSize}x${2 * userProfAvaSize}/` + originalUrl
+			[defaultAvaSize]: `https://dsiteimages.com/${2 * defaultAvaSize}x${2 * defaultAvaSize}/` + originalUrl,
+			[userCardAvaSize]: `https://dsiteimages.com/${2 * userCardAvaSize}x${2 * userCardAvaSize}/` + originalUrl,
+			[userProfAvaSize]: `https://dsiteimages.com/${2 * userProfAvaSize}x${2 * userProfAvaSize}/` + originalUrl
 		};
 	}
 	let imageLink = {[originalUrl]: proxyUrl};

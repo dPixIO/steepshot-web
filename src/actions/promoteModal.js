@@ -119,12 +119,12 @@ export function sendBid() {
     const {postIndex, suitableBot} = state.promoteModal;
 		const {amount, selectedToken} = state.wallet;
     const botName = suitableBot.name;
-		const steemLink = `https://steemit.com${postIndex}`;
+		const dpayLink = `https://dsite.io${postIndex}`;
 		const selectedTokenName = state.services.tokensNames[selectedToken];
 		dispatch(actionLock());
 		dispatch(showBodyLoader());
     if (storage.accessToken) {
-      WalletService.steemConnectTransfer(amount, selectedTokenName, botName, steemLink)
+      WalletService.dPayIdTransfer(amount, selectedTokenName, botName, dpayLink)
         .then(() => {
           dispatch(actionUnlock());
           dispatch(hideBodyLoader());
@@ -134,7 +134,7 @@ export function sendBid() {
         });
       return;
     }
-		WalletService.transfer(activeKey || storage.activeKey, amount, selectedTokenName, botName, steemLink)
+		WalletService.transfer(activeKey || storage.activeKey, amount, selectedTokenName, botName, dpayLink)
 			.then(() => {
 				dispatch(actionUnlock());
 				dispatch(pushMessage(Constants.PROMOTE.BID_TO_BOT_SUCCESS));

@@ -8,7 +8,7 @@ const PowerForm = ({amount, amountError, amountOnChange, tokensAmount, token, de
 
 	function useMaxAmount() {
     if (className === 'form_power-down') {
-    	let allowedPowerDownSP = tokensAmount - Constants.TRANSFER.MIN_LEAVE_STEEM_POWER - delegated - received;
+    	let allowedPowerDownSP = tokensAmount - Constants.TRANSFER.MIN_LEAVE_DPAY_POWER - delegated - received;
     	if (allowedPowerDownSP < 0) allowedPowerDownSP = 0;
       tokensAmount = allowedPowerDownSP.toFixed(3) / 1;
     }

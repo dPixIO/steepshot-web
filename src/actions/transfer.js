@@ -68,7 +68,7 @@ export function transfer() {
 		dispatch(actionLock());
     dispatch(showBodyLoader());
 		if (storage.accessToken) {
-			WalletService.steemConnectTransfer(amount, selectedTokenName, to, memo)
+			WalletService.dPayIdTransfer(amount, selectedTokenName, to, memo)
 				.then(() => {
           dispatch(actionUnlock());
           dispatch(hideBodyLoader());

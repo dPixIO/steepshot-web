@@ -1,4 +1,4 @@
-import GolosService from './GolosService';
+import DWebService from './DWebService';
 
 class ChainService {
 	static currentService = null;
@@ -68,8 +68,8 @@ class ChainService {
     return ChainService.currentService.claimRewards(liquid_tokens, not_liquid_tokens, power_tokens)
   }
 
-	static usingGolos() {
-		return ChainService.currentService instanceof GolosService
+	static usingDWeb() {
+		return ChainService.currentService instanceof DWebService
 	}
 }
 

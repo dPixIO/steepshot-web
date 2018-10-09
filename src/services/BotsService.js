@@ -24,8 +24,8 @@ class BotsService {
 				}
 				return RequestService.get(Constants.SERVICES.BOTS.BOOTS_TOKENS_COURSES)
 					.then(courses => {
-						const steemToUSD = courses['steem_price'].toFixed(2);
-						const sbdToUSD = courses['sbd_price'].toFixed(2);
+						const dpayToUSD = courses['dpay_price'].toFixed(2);
+						const bbdToUSD = courses['bbd_price'].toFixed(2);
 						const state = getStore().getState();
 						const promoteModalInfo = state.promoteModal;
 						const permlink = promoteModalInfo.postIndex.replace(/\/[a-z\d-]+\/(.+)/, '$1');
@@ -43,10 +43,10 @@ class BotsService {
 									if (suitableBots[i]['min_bid'] <= promoteAmount) {
 										if (
 											suitableBots[i].next <= 100 * Constants.MILLISECONDS_IN_SECOND ||
-											(!suitableBots[i]['accepts_steem'] && selectedToken === 'STEEM') ||
+											(!suitableBots[i]['accepts_dpay'] && selectedToken === 'BEX') ||
 											state.posts[promoteModalInfo.postIndex].postAge >= suitableBots[i]['max_post_age'] ||
 											suitableBots[i]['is_disabled'] ||
-											!BotsService.checkAmount(promoteAmount, steemToUSD, sbdToUSD, selectedToken,
+											!BotsService.checkAmount(promoteAmount, dpayToUSD, bbdToUSD, selectedToken,
 												suitableBots[i]) ||
 											BotsService.checkUpvotedUsers(suitableBots[i].name, usersResult.results)
 										) {
@@ -89,15 +89,15 @@ class BotsService {
 			});
 	}
 
-	static checkAmount(promoteAmount, steemToUSD, sbdToUSD, token, botInfo) {
+	static checkAmount(promoteAmount, dpayToUSD, bbdToUSD, token, botInfo) {
 		const amountLimit = botInfo['vote_usd'];
 		const bidsAmountInBot = botInfo['total_usd'];
 		let userBidInUSD;
-		if (token === 'STEEM') {
-			userBidInUSD = promoteAmount * steemToUSD;
+		if (token === 'BEX') {
+			userBidInUSD = promoteAmount * dpayToUSD;
 		}
 		if (token === 'SBD') {
-			userBidInUSD = promoteAmount * sbdToUSD;
+			userBidInUSD = promoteAmount * bbdToUSD;
 		}
 		return (userBidInUSD + bidsAmountInBot) < amountLimit - (amountLimit * 0.25);
 	}

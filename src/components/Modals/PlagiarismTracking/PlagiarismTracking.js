@@ -64,11 +64,11 @@ class PlagiarismTracking extends React.Component {
 				{this.renderImage()}
 				<p className="descrip_plag-track">We have found a
 					<Link to={`/post/@${this.props.data.plagiarism_author}/${this.props.data.plagiarism_permlink}`}
-					      target="_blank"> similar photo</Link> in Steepshot, uploaded by {this.plagiarismAuthor()}
+					      target="_blank"> similar photo</Link> in dPix, uploaded by {this.plagiarismAuthor()}
 				</p>
 				{this.plagiarismSubText()}
 				<p className="guidelines_plag-track">
-					<a href={`https://steepshot.org/ipfs/${this.props.data.ipfs}`} target="_blank">IPFS link</a>
+					<a href={`https://dpix.network/ipfs/${this.props.data.ipfs}`} target="_blank">IPFS link</a>
 				</p>
 				<div className="buttons_plag-track">
 					<button className="btn btn-cancel" onClick={this.closeModal.bind(this)}>NO, CANCEL PUBLISHING</button>

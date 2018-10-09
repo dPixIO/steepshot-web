@@ -58,9 +58,9 @@ export function getPostsList(point) {
 				//TODO удалить когда будут реальные видео в ленте
 				/*if (response.results[2]) {
 					const media = response.results[2].media[0];
-					media.url = 'http://steepshot.org/api/v1/image/1440930c-6a1c-4fae-bc63-4646495cc96a.mp4';
+					media.url = 'http://dpix.org/api/v1/image/1440930c-6a1c-4fae-bc63-4646495cc96a.mp4';
 					if (media['thumbnails'] && media['thumbnails'][1024]) {
-						media['thumbnails'][1024] = 'http://steepshot.org/api/v1/image/1440930c-6a1c-4fae-bc63-4646495cc96a.mp4';
+						media['thumbnails'][1024] = 'http://dpix.org/api/v1/image/1440930c-6a1c-4fae-bc63-4646495cc96a.mp4';
 					}
 				}*/
 				let newPosts = response.results;
